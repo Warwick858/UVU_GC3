@@ -9,9 +9,12 @@
     d:DesignWidth="328.319" Height="89.442">
 
     <StackPanel Orientation="Horizontal">
-        <RepeatButton x:Name="seekBck" Content="&lt;&lt;" Style="{StaticResource watchBtnStyle}" HorizontalAlignment="Right" Margin="34,40,0,0" VerticalAlignment="Center"/>
-        <RepeatButton x:Name="seekFwd" Content=">>" HorizontalAlignment="Right" Margin="34,40,0,0" VerticalAlignment="Center"/>
+        <AppBarButton x:Name="restartBtn" Style="{StaticResource PivotTitleContentControlStyle}" HorizontalAlignment="Center" Label="" VerticalAlignment="Center" Icon="Refresh"/>
+        <AppBarButton x:Name="startStopBtn" Style="{StaticResource PivotTitleContentControlStyle}" HorizontalAlignment="Center" Label="" VerticalAlignment="Center" Icon="Play"/>
+        <RepeatButton x:Name="seekBckBtn" Content="&lt;&lt;" Style="{StaticResource watchBtnStyle}"/>
+        <RepeatButton x:Name="seekFwdBtn" Content=">>" Style="{StaticResource watchBtnStyle}"/>
         
+
 
     </StackPanel>
 </UserControl>
