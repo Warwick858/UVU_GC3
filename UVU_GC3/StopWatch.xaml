@@ -6,15 +6,33 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    d:DesignWidth="328.319" Height="89.442">
+    d:DesignWidth="320" Height="65" HorizontalAlignment="Center" VerticalAlignment="Center">
 
-    <StackPanel Orientation="Horizontal">
-        <AppBarButton x:Name="restartBtn" Style="{StaticResource PivotTitleContentControlStyle}" HorizontalAlignment="Center" Label="" VerticalAlignment="Center" Icon="Refresh"/>
-        <AppBarButton x:Name="startStopBtn" Style="{StaticResource PivotTitleContentControlStyle}" HorizontalAlignment="Center" Label="" VerticalAlignment="Center" Icon="Play"/>
-        <RepeatButton x:Name="seekBckBtn" Content="&lt;&lt;" Style="{StaticResource watchBtnStyle}"/>
-        <RepeatButton x:Name="seekFwdBtn" Content=">>" Style="{StaticResource watchBtnStyle}"/>
+    <Border Background="#32412D" HorizontalAlignment="Center" VerticalAlignment="Center">
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <!--<AppBarButton x:Name="restartBtn" Style="{StaticResource watchBtnStyle}" Icon="Refresh"/>
+            <AppBarButton x:Name="startStopBtn" Style="{StaticResource watchBtnStyle}" Width="36" Height="36" Icon="Play"/>-->
+
+            <RepeatButton x:Name="restartBtn" Style="{StaticResource watchBtnStyle}" ClickMode="Release">
+                <SymbolIcon Symbol="Refresh"/>
+            </RepeatButton>
+
+            <RepeatButton x:Name="startStopBtn" Style="{StaticResource watchBtnStyle}" ClickMode="Release">
+                <SymbolIcon Symbol="Play"/>
+            </RepeatButton>
+
+            <RepeatButton x:Name="seekBckBtn" Style="{StaticResource watchBtnStyle}">
+                <SymbolIcon Symbol="Previous"/>
+            </RepeatButton>
+
+            <RepeatButton x:Name="seekFwdBtn" Style="{StaticResource watchBtnStyle}">
+                <SymbolIcon Symbol="Next"/>
+            </RepeatButton>
+
+            <Border Background="Black" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="2" Padding="0, 2, 0, 0">
+                <TextBlock x:Name="timeTxt" Style="{StaticResource timeTextStyle}" Margin="10">00:00:00</TextBlock>
+            </Border>
         
-
-
-    </StackPanel>
+        </StackPanel>
+    </Border>
 </UserControl>
