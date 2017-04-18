@@ -29,6 +29,7 @@ namespace UVU_GC3
         public TimeSpan _currentElapsed = TimeSpan.Zero;
         public TimeSpan _totalElapsed = TimeSpan.Zero;
         private bool _timerRunning = false;
+        private static TimeSpan _timeSinceStart;
 
         /// <summary>
         /// Default Constructor - To initialize components
@@ -36,8 +37,6 @@ namespace UVU_GC3
         public StopWatch()
         {
             this.InitializeComponent();
-
-            InitTimer();
         } // end default constructor
 
         /// <summary>
@@ -50,7 +49,7 @@ namespace UVU_GC3
             _timer.Tick += Timer_Tick;
             _timer.Interval = new TimeSpan(0, 0, 1);
             _timer.Start();
-            //this.DataContext = timer;
+            //this.DataContext = this._currentElapsed;
 
             //Display time of zero - 00:00:00
             TimeTxt.Text = _currentElapsed.ToString();
@@ -72,13 +71,13 @@ namespace UVU_GC3
         private void ProcessTick()
         {
             //
-            var timeSinceStart = DateTime.Now - _startTime;
-            timeSinceStart = new TimeSpan(timeSinceStart.Hours,
-                                            timeSinceStart.Minutes,
-                                            timeSinceStart.Seconds);
+            _timeSinceStart = DateTime.Now - _startTime;
+            _timeSinceStart = new TimeSpan(_timeSinceStart.Hours,
+                                            _timeSinceStart.Minutes,
+                                            _timeSinceStart.Seconds);
 
             //
-            _currentElapsed = timeSinceStart + _totalElapsed;
+            _currentElapsed = _timeSinceStart + _totalElapsed;
             TimeTxt.Text = _currentElapsed.ToString();
         } // end method ProcessTick()
 
@@ -92,6 +91,9 @@ namespace UVU_GC3
             //If timer ISN'T running
             if (!_timerRunning)
             {
+                //Initialize timer
+                InitTimer();
+
                 //Set start time to now
                 _startTime = DateTime.Now;
 
@@ -139,18 +141,27 @@ namespace UVU_GC3
         /// <param name="e"></param>
         private void SeekBckBtn_Click(object sender, RoutedEventArgs e)
         {
+            //
+            _timer.Stop();
+            _timerRunning = false;
+
             //If timer is greater than zero
             if (_currentElapsed.Seconds > 0)
             {
-                //
-                var timeSinceStart = DateTime.Now.AddSeconds(1) - _startTime;
-                timeSinceStart = new TimeSpan(timeSinceStart.Hours,
-                                                timeSinceStart.Minutes,
-                                                timeSinceStart.Seconds);
+                //_currentElapsed = _currentElapsed.Add(DateTime.Now.AddSeconds(1).To);
+
 
                 //
-                _currentElapsed = timeSinceStart + _totalElapsed;
+                _timeSinceStart = DateTime.Now.AddSeconds(3) - _startTime;
+                //timeSinceStart = new TimeSpan(timeSinceStart.Hours,
+                //                                timeSinceStart.Minutes,
+                //                                timeSinceStart.Seconds);
+
+                //
+                _currentElapsed = _timeSinceStart + _totalElapsed;
                 TimeTxt.Text = _currentElapsed.ToString();
+
+                _timer.Start();
             } // end if
         } // end method SeekBckBtn_Click()
 
@@ -162,14 +173,37 @@ namespace UVU_GC3
         private void SeekFwdBtn_Click(object sender, RoutedEventArgs e)
         {
             //
-            var timeSinceStart = DateTime.Now.AddMilliseconds(1000) - _startTime;
-            timeSinceStart = new TimeSpan(timeSinceStart.Hours,
-                                            timeSinceStart.Minutes,
-                                            timeSinceStart.Seconds);
+            _timer.Stop();
+            _timerRunning = false;
+
+            TimeSpan currDisplayed = new TimeSpan(int.Parse(TimeTxt.Text.Substring(0, 2)), int.Parse(TimeTxt.Text.Substring(3, 2)), int.Parse(TimeTxt.Text.Substring(6, 2)));
+
+            currDisplayed = currDisplayed.Add(new TimeSpan(0, 0, 10));
+
+            TimeTxt.Text = currDisplayed.ToString();
+
+            _timeSinceStart = new TimeSpan(currDisplayed.Hours, currDisplayed.Minutes, currDisplayed.Seconds);
+
+            _currentElapsed = _timeSinceStart + _totalElapsed;
+
+            //timeee.Add(new TimeSpan(0, 0, 1));
+
+            //timeSinceStart.Add(new TimeSpan(0, 0, 1)) - _startTime;
+            //timeSinceStart = DateTime.Now.AddMilliseconds(1000) - _startTime; 
+            //timeSinceStart = new TimeSpan(timeSinceStart.Hours,
+            //                                timeSinceStart.Minutes,
+            //                                timeSinceStart.Seconds);
 
             //
-            _currentElapsed = timeSinceStart + _totalElapsed;
-            TimeTxt.Text = _currentElapsed.ToString();
+            //_currentElapsed = timeSinceStart + _totalElapsed;
+            //TimeTxt.Text = _currentElapsed.ToString();
+
+            //_timer.Start();
         } // end method SeekFwdBtn_Click()
+
+        private void SeekFwdBtn_PointerReleased(object sender, PointerRoutedEventArgs e)
+        {
+            //_timer.Start();
+        }
     } // end class StopWatch
 } // end namespace UVU_GC3

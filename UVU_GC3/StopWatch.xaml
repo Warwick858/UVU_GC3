@@ -25,12 +25,12 @@
                 <SymbolIcon Symbol="Previous"/>
             </RepeatButton>
 
-            <RepeatButton x:Name="SeekFwdBtn" Style="{StaticResource watchBtnStyle}" Delay="500" Interval="100" Click="SeekFwdBtn_Click">
+            <RepeatButton x:Name="SeekFwdBtn" Style="{StaticResource watchBtnStyle}" Delay="100" Interval="10" Click="SeekFwdBtn_Click" PointerReleased="SeekFwdBtn_PointerReleased">
                 <SymbolIcon Symbol="Next"/>
             </RepeatButton>
 
             <Border Background="Black" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="2" Padding="0, 2, 0, 0">
-                <TextBlock x:Name="TimeTxt" Text="{Binding Elapsed, Mode=TwoWay}" Style="{StaticResource timeTextStyle}" Margin="10" Width="120"></TextBlock>
+                <TextBlock x:Name="TimeTxt" Text="00:00:00" Style="{StaticResource timeTextStyle}" Margin="10" Width="120"></TextBlock>
             </Border>
         </StackPanel>
     </Border>
