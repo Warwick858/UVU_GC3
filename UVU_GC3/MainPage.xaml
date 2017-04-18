@@ -8,6 +8,7 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <local:StopWatch HorizontalAlignment="Left" Margin="769,517,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </Page>
