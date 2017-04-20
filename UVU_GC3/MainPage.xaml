@@ -8,7 +8,41 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <local:StopWatch HorizontalAlignment="Left" Margin="769,517,0,0" VerticalAlignment="Top"/>
 
+        <SplitView IsPaneOpen="True" DisplayMode="CompactOverlay" PaneBackground="Beige" OpenPaneLength="200" CompactPaneLength="30">
+            <SplitView.Pane>
+                <ListView>
+                    
+                </ListView>
+            </SplitView.Pane>
+            <SplitView.Content>
+                <FlipView>
+                    
+                </FlipView>
+            </SplitView.Content>
+        </SplitView>
+        
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState x:Name="Normal">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="900">
+                        </AdaptiveTrigger>
+                    </VisualState.StateTriggers>
+                </VisualState>
+                <VisualState x:Name="DesktopSplitScreen">
+                    <VisualState.Setters>
+                        <Setter Value=""
+                                Target="text.(RelativePanel.AlignTopWidth)">
+                        </Setter>
+                    </VisualState.Setters>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0">
+                        </AdaptiveTrigger>
+                    </VisualState.StateTriggers>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+        
     </Grid>
 </Page>
