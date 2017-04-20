@@ -21,11 +21,11 @@
                 <SymbolIcon Symbol="Play"/>
             </RepeatButton>
 
-            <RepeatButton x:Name="SeekBckBtn" Style="{StaticResource watchBtnStyle}" Delay="500" Interval="100" Click="SeekBckBtn_Click">
+            <RepeatButton x:Name="SeekBckBtn" Style="{StaticResource watchBtnStyle}" Delay="100" Interval="10" Click="SeekBckBtn_Click">
                 <SymbolIcon Symbol="Previous"/>
             </RepeatButton>
 
-            <RepeatButton x:Name="SeekFwdBtn" Style="{StaticResource watchBtnStyle}" Delay="100" Interval="10" Click="SeekFwdBtn_Click" PointerReleased="SeekFwdBtn_PointerReleased">
+            <RepeatButton x:Name="SeekFwdBtn" Style="{StaticResource watchBtnStyle}" Delay="100" Interval="10" Click="SeekFwdBtn_Click">
                 <SymbolIcon Symbol="Next"/>
             </RepeatButton>
 
