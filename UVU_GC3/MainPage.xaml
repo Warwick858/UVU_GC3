@@ -7,21 +7,28 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid Background="#32412D">
 
-        <SplitView IsPaneOpen="True" DisplayMode="CompactOverlay" PaneBackground="Beige" OpenPaneLength="200" CompactPaneLength="30">
+        <SplitView IsPaneOpen="True" DisplayMode="CompactOverlay" PaneBackground="#1EA721" OpenPaneLength="150" CompactPaneLength="30">
             <SplitView.Pane>
-                <ListView>
-                    
-                </ListView>
+                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <AppBarButton x:Name="MnuResBtn" Style="{StaticResource SideMenuBtnStyle}" Icon="Calendar" Label="Reservations"/>
+                    <AppBarButton x:Name="MnuSignageBtn" Style="{StaticResource SideMenuBtnStyle}" Icon="Pictures" Label="Signage"/>
+                    <AppBarButton x:Name="MnuResDocsBtn" Style="{StaticResource SideMenuBtnStyle}" Icon="Page" Label="Confirmation"/>
+                    <AppBarButton x:Name="MnuOtherBtn" Style="{StaticResource SideMenuBtnStyle}" Icon="Page2" Label="Invoice"/>
+                    <AppBarButton x:Name="MnuWebsiteBtn" Style="{StaticResource SideMenuBtnStyle}" Icon="Globe" Label="Website"/>
+                    <AppBarButton x:Name="MnuSaveBtn" Style="{StaticResource SideMenuBtnStyle}" Icon="Save" Label="Save"/>
+                    <AppBarButton x:Name="MnuExitBtn" Style="{StaticResource SideMenuBtnStyle}" Icon="Clear" Label="Exit"/>
+                </StackPanel>
             </SplitView.Pane>
             <SplitView.Content>
                 <FlipView>
-                    
+                    <local:PlayerBox HorizontalAlignment="Left" Margin="936,438,0,0" VerticalAlignment="Top"/>
+
                 </FlipView>
             </SplitView.Content>
         </SplitView>
-        
+
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup>
                 <VisualState x:Name="Normal">
@@ -43,6 +50,6 @@
                 </VisualState>
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
-        
+
     </Grid>
 </Page>
