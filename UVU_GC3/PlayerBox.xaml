@@ -9,8 +9,20 @@
     d:DesignHeight="200"
     d:DesignWidth="320">
 
-    <FlipView Name="MainFlipView" Background="Yellow" Margin="10">
-        <Grid></Grid>
+    <FlipView Name="MainFlipView" Background="#888577" Margin="2">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <!--<Image Grid.Row="0" Grid.Column="0" Source="Assets/Xbox.png"></Image>-->
+        </Grid>
         <Image Source="Assets/StoreLogo.png"></Image>
     </FlipView>
 </UserControl>
