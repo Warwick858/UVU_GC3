@@ -10,8 +10,6 @@
 
     <Border Background="#32412D" HorizontalAlignment="Center" VerticalAlignment="Center">
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Width="320" Height="62">
-            <!--<AppBarButton x:Name="restartBtn" Style="{StaticResource watchBtnStyle}" Icon="Refresh"/>
-            <AppBarButton x:Name="startStopBtn" Style="{StaticResource watchBtnStyle}" Width="36" Height="36" Icon="Play"/>-->
 
             <RepeatButton x:Name="RestartBtn" Style="{StaticResource StopWatchBtnStyle}" ClickMode="Release" Click="RestartBtn_Click" Margin="5,2,2,2">
                 <SymbolIcon Symbol="Refresh"/>
@@ -32,6 +30,8 @@
             <Border Background="Black" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="2" Padding="0, 2, 0, 0">
                 <TextBlock x:Name="TimeTxt" Text="00:00:00" Style="{StaticResource StopWatchTimeTextStyle}" Margin="10" Width="120"></TextBlock>
             </Border>
+            
         </StackPanel>
+        
     </Border>
 </UserControl>

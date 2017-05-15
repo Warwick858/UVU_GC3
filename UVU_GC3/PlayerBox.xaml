@@ -15,22 +15,49 @@
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <!--<Image Grid.Row="0" Grid.Column="0" Source="Assets/Xbox.png"></Image>-->
-            <Image x:Name="SelectedImg" Grid.RowSpan="3" Source="." Margin="4" HorizontalAlignment="Center" VerticalAlignment="Center"></Image>
+            
+            <Image x:Name="SelectedImg" 
+                   Grid.RowSpan="4" 
+                   Grid.ColumnSpan="2"
+                   Source="." 
+                   Margin="4" 
+                   HorizontalAlignment="Center" 
+                   VerticalAlignment="Center">
+            </Image>
+
+            <ToggleSwitch x:Name="WaitingToggle"
+                    Grid.Row="0"
+                    Grid.Column="2"
+                    >
+                    Waiting
+            </ToggleSwitch>
+
+            <TextBox x:Name="WaitingTxtBx"
+                    Grid.Row="0"
+                    Grid.Column="3" 
+                    Text="Larry">
+                
+            </TextBox>
 
             <local:StopWatch x:Name="TimeSWatch" 
-                             Grid.Row="2" 
+                             Grid.Row="4" 
                              Grid.Column="0" 
-                             Grid.ColumnSpan="3"
+                             Grid.RowSpan="2"
+                             Grid.ColumnSpan="4"
                              Width="Auto">
             </local:StopWatch>
         </Grid>
+        
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition></RowDefinition>
@@ -43,5 +70,6 @@
             </Grid.ColumnDefinitions>
         </Grid>
         <Image Source="Assets/StoreLogo.png"></Image>
+        
     </FlipView>
 </UserControl>
