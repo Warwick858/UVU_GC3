@@ -113,6 +113,7 @@
     <None Include="UVU_GC3_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\Halo.jpg" />
     <Content Include="Assets\Xbox.png" />
     <Content Include="Assets\Square150x150Logo.scale-100.png" />
     <Content Include="Assets\Square71x71Logo.scale-400.png" />
