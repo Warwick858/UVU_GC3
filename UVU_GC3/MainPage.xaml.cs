@@ -13,7 +13,15 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
+//									     ____.           .____             _____  _______   
+//									    |    |           |    |    ____   /  |  | \   _  \  
+//									    |    |   ______  |    |   /  _ \ /   |  |_/  /_\  \ 
+//									/\__|    |  /_____/  |    |__(  <_> )    ^   /\  \_/   \
+//									\________|           |_______ \____/\____   |  \_____  /
+//									                             \/          |__|        \/ 
+//
+// ******************************************************************************************************************
+//
 
 namespace UVU_GC3
 {

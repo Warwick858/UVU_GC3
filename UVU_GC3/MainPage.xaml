@@ -9,19 +9,37 @@
 
     <Grid Background="#32412D">
 
-        <SplitView IsPaneOpen="True" DisplayMode="CompactOverlay" PaneBackground="#1EA721" OpenPaneLength="150" CompactPaneLength="30">
+        <SplitView 
+            IsPaneOpen="True" 
+            DisplayMode="CompactOverlay" 
+            PaneBackground="#1EA721" 
+            OpenPaneLength="150" 
+            CompactPaneLength="30">
+            
             <SplitView.Pane>
-                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <AppBarButton x:Name="MnuResBtn" Style="{StaticResource SideMenuBtnStyle}" Icon="Calendar" Label="Reservations"/>
+                
+                <StackPanel 
+                    HorizontalAlignment="Center" 
+                    VerticalAlignment="Center">
+                    
+                    <AppBarButton 
+                        x:Name="MnuResBtn" 
+                        Style="{StaticResource SideMenuBtnStyle}" 
+                        Icon="Calendar" 
+                        Label="Reservations"/>
+                    
                     <AppBarButton x:Name="MnuSignageBtn" Style="{StaticResource SideMenuBtnStyle}" Icon="Pictures" Label="Signage"/>
                     <AppBarButton x:Name="MnuResDocsBtn" Style="{StaticResource SideMenuBtnStyle}" Icon="Page" Label="Confirmation"/>
                     <AppBarButton x:Name="MnuOtherBtn" Style="{StaticResource SideMenuBtnStyle}" Icon="Page2" Label="Invoice"/>
                     <AppBarButton x:Name="MnuWebsiteBtn" Style="{StaticResource SideMenuBtnStyle}" Icon="Globe" Label="Website"/>
                     <AppBarButton x:Name="MnuSaveBtn" Style="{StaticResource SideMenuBtnStyle}" Icon="Save" Label="Save"/>
                     <AppBarButton x:Name="MnuExitBtn" Style="{StaticResource SideMenuBtnStyle}" Icon="Clear" Label="Exit"/>
+                
                 </StackPanel>
             </SplitView.Pane>
+            
             <SplitView.Content>
+                
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition></RowDefinition>
@@ -36,9 +54,20 @@
                         <ColumnDefinition></ColumnDefinition>
                         <ColumnDefinition></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <local:PlayerBox HorizontalAlignment="Left" Margin="856,319,0,0" VerticalAlignment="Top" Height="288" Width="546"/>
-                    <!--<local:PlayerBox Width="546" Height="288" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="856,320,0,0"/>-->
+                    
+                    <local:PlayerBox 
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        Grid.RowSpan="1"
+                        Grid.ColumnSpan="2"
+                        Height="260" 
+                        Width="500"
+                        HorizontalAlignment="Left" 
+                        VerticalAlignment="Center" 
+                        />
+
                 </Grid>
+                
             </SplitView.Content>
         </SplitView>
 
