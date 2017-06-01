@@ -44,7 +44,8 @@ namespace UVU_GC3
         {
             this.InitializeComponent();
 
-            LoadItems();
+            //LoadItems();
+            LoadItemsAsync();
         } // end constructor
 
         /// <summary>
@@ -54,16 +55,16 @@ namespace UVU_GC3
         /// <param name="e">SelectionChangedEventArgs</param>
         private void PlayerFlipView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            ////Save sender as flip view
-            //FlipView flipView = sender as FlipView;
+            //Save sender as flip view
+            FlipView flipView = sender as FlipView;
 
-            ////If flip view lands on items list (third view)
-            //if (flipView.SelectedIndex.Equals(1))
-            //{
-            //    LoadItemsAsync();
+            //If flip view lands on items list (third view)
+            if (flipView.SelectedIndex.Equals(1))
+            {
+                //LoadItemsAsync();
 
-            //    LoadItems();
-            //} // end if
+                //LoadItems();
+            } // end if
         } // end method PlayerFlipView_SelectionChanged()
 
         private void LoadItems()
@@ -72,7 +73,7 @@ namespace UVU_GC3
 
             itemsList.Add("/Assets/Thumbnails/battleborn.jpg");
             itemsList.Add("/Assets/Thumbnails/battlefield.jpg");
-            itemsList.Add("/Assets/Thumbnails/cod.jpg");
+            
 
             //
             this.DataContext = itemsList;
@@ -85,12 +86,14 @@ namespace UVU_GC3
 
             StorageFolder appInstalledFolder = Windows.ApplicationModel.Package.Current.InstalledLocation;
             StorageFolder assets = await appInstalledFolder.GetFolderAsync("Assets");
-            var files = await assets.GetFilesAsync();
+
+            StorageFolder thumbnails = await assets.GetFolderAsync("Thumbnails");
+            var files = await thumbnails.GetFilesAsync();
 
             //
-            foreach (StorageFile asset in files)
+            foreach (StorageFile thumb in files)
             {
-                itemsList.Add(asset.ToString());
+                itemsList.Add(thumb.Path);
             }
 
             //
@@ -102,21 +105,21 @@ namespace UVU_GC3
         /// </summary>
         /// <param name="sender">object</param>
         /// <param name="e">RoutedEventArgs</param>
-        private void WaitingToggle_Toggled(object sender, RoutedEventArgs e)
-        {
-            //Toggle is ON
-            if (WaitingToggle.IsOn)
-            {
-                //Change waiting textbox background to red, and bring into focus 
-                WaitingTxt.Background = new SolidColorBrush(Colors.Red);
-                WaitingTxt.Focus(FocusState.Programmatic);
-            } // end if
-            else // toggle is OFF
-            {
-                WaitingTxt.Background = new SolidColorBrush(Colors.White);
-                WaitingTxt.Text = string.Empty;
-            } // end else
-        } // end method WaitingToggle_Toggled()
+        //private void WaitingToggle_Toggled(object sender, RoutedEventArgs e)
+        //{
+        //    //Toggle is ON
+        //    if (WaitingToggle.IsOn)
+        //    {
+        //        //Change waiting textbox background to red, and bring into focus 
+        //        WaitingTxt.Background = new SolidColorBrush(Colors.Red);
+        //        WaitingTxt.Focus(FocusState.Programmatic);
+        //    } // end if
+        //    else // toggle is OFF
+        //    {
+        //        WaitingTxt.Background = new SolidColorBrush(Colors.White);
+        //        WaitingTxt.Text = string.Empty;
+        //    } // end else
+        //} // end method WaitingToggle_Toggled()
 
         /// <summary>
         /// 

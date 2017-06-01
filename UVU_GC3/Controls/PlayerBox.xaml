@@ -6,8 +6,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    d:DesignHeight="200"
-    d:DesignWidth="330">
+    d:DesignHeight="270"
+    d:DesignWidth="581">
 
     <FlipView 
         Name="PlayerFlipView" 
@@ -49,12 +49,12 @@
                 
                 <Border.Background>
                     <ImageBrush x:Name="SelectedImg" 
-                        ImageSource="/Assets/Halo.jpg">
+                        ImageSource="/Assets/Thumbnails/haloc.jpg">
                     </ImageBrush>
                 </Border.Background>
             </Border>
 
-            <ToggleSwitch 
+            <!--<ToggleSwitch 
                 x:Name="WaitingToggle"
                 OffContent="No Wait"
                 OnContent="Waiting"
@@ -71,7 +71,7 @@
                 HorizontalAlignment="Center"
                 VerticalAlignment="Top"
                 HorizontalContentAlignment="Center" 
-                Toggled="WaitingToggle_Toggled"/>
+                Toggled="WaitingToggle_Toggled"/>-->
 
             <TextBox 
                 x:Name="WaitingTxt"
@@ -165,10 +165,17 @@
             
         </StackPanel>-->
 
-        <GridView ItemsSource="{Binding}">
+        <GridView 
+            ItemsSource="{Binding}"
+            Margin="22.5,0,0,0">
+            
             <GridView.ItemTemplate>
                 <DataTemplate>
-                    <Grid>
+                    
+                    <Grid 
+                        HorizontalAlignment="Stretch" 
+                        VerticalAlignment="Center">
+                        
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"></RowDefinition>
                             <RowDefinition Height="Auto"></RowDefinition>
@@ -176,18 +183,52 @@
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"></ColumnDefinition>
                             <ColumnDefinition Width="Auto"></ColumnDefinition>
+                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                            <ColumnDefinition Width="Auto"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
+                        
                         <Image 
-                            Width="100"
-                            Height="120"
+                            Width="103"
+                            Height="130"
                             Source="{Binding}"
-                            Stretch="UniformToFill" />
+                            Stretch="Fill" />
                     </Grid>
                 </DataTemplate>
             </GridView.ItemTemplate>
             
         </GridView>
-        
+
+        <!--<GridView 
+            ItemsSource="{Binding}" 
+            Margin="10,0,10,0"
+            
+            HorizontalContentAlignment="Stretch" 
+            VerticalContentAlignment="Stretch">
+
+            <GridView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel 
+                        Orientation="Horizontal"
+                        Margin="10">
+                        
+                        <Image 
+                        Width="100"
+                        Height="120"
+                        Source="{Binding}"
+                        Stretch="UniformToFill" />
+                        
+                    </StackPanel>
+
+                    
+                </DataTemplate>
+            </GridView.ItemTemplate>
+            <GridView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <ItemsWrapGrid MaximumRowsOrColumns="10" />
+                </ItemsPanelTemplate>
+            </GridView.ItemsPanel>
+        </GridView>-->
+
         <Image Source="/Assets/Xbox.png"></Image>
         
     </FlipView>
