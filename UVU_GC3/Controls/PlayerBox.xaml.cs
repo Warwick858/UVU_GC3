@@ -129,7 +129,7 @@ namespace UVU_GC3
         private void DecrementBtn_Click(object sender, RoutedEventArgs e)
         {
             //Save items text as int
-            int count = int.Parse(ItemsTxt.Text);
+            int count = int.Parse(ItemCountLbl.Text);
 
             //If count can be decremented, do it
             if (count > 0)
@@ -138,7 +138,7 @@ namespace UVU_GC3
             } // end if
 
             //Set new items text value
-            ItemsTxt.Text = count.ToString();
+            ItemCountLbl.Text = count.ToString();
         } // end method DecrementBtn_Click()
 
         /// <summary>
@@ -149,7 +149,7 @@ namespace UVU_GC3
         private void IncrementBtn_Click(object sender, RoutedEventArgs e)
         {
             //Save items text as int
-            int count = int.Parse(ItemsTxt.Text);
+            int count = int.Parse(ItemCountLbl.Text);
 
             //If count hasn't reached max, increment it
             if (count < 50)
@@ -158,7 +158,7 @@ namespace UVU_GC3
             } // end if
 
             //Set new items text value
-            ItemsTxt.Text = count.ToString();
+            ItemCountLbl.Text = count.ToString();
         } // end method IncrementBtn_Click()
 
 

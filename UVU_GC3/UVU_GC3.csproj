@@ -113,6 +113,8 @@
     <None Include="UVU_GC3_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\ID_Samples\utsm.png" />
+    <Content Include="Assets\ID_Samples\uvusm.png" />
     <Content Include="Assets\Thumbnails\battleborn.jpg" />
     <Content Include="Assets\Thumbnails\battlefield.jpg" />
     <Content Include="Assets\Thumbnails\destiny.png" />
@@ -171,6 +173,7 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

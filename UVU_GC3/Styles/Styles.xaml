@@ -9,6 +9,14 @@
     <Color x:Key="LtDrk">#ADD6AE</Color>
     <Color x:Key="Accent">#FF5921</Color>
     <Color x:Key="Neutral">#888577</Color>
+    <Color x:Key="LtNeutral">#D4D0BA</Color>
+
+    <SolidColorBrush x:Key="DarkDrkBrush" Color="{ThemeResource DarkDrk}"></SolidColorBrush>
+    <SolidColorBrush x:Key="MedDrkBrush" Color="{ThemeResource MedDrk}"></SolidColorBrush>
+    <SolidColorBrush x:Key="LtDrkBrush" Color="{ThemeResource LtDrk}"></SolidColorBrush>
+    <SolidColorBrush x:Key="AccentBrush" Color="{ThemeResource Accent}"></SolidColorBrush>
+    <SolidColorBrush x:Key="NeutralBrush" Color="{ThemeResource Neutral}"></SolidColorBrush>
+    <SolidColorBrush x:Key="LtNeutralBrush" Color="{ThemeResource LtNeutral}"></SolidColorBrush>
 
     <Style x:Key="SideMenuBtnStyle" TargetType="AppBarButton">
         <Setter Property="Width" Value="90"/>

@@ -13,40 +13,79 @@
         Name="PlayerFlipView" 
         Background="#888577" 
         Margin="2" SelectionChanged="PlayerFlipView_SelectionChanged">
-        
+
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition></RowDefinition>
-                <RowDefinition></RowDefinition>
-                <RowDefinition></RowDefinition>
-                <RowDefinition></RowDefinition>
-                <RowDefinition></RowDefinition>
-                <RowDefinition></RowDefinition>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition Height="1.5*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition Width="3.9*"/>
+                <ColumnDefinition Width="1.4*"/>
+                <ColumnDefinition Width="0.75*"/>
+                <ColumnDefinition Width="0.75*"/>
             </Grid.ColumnDefinitions>
 
-            <Border
+            <StackPanel
                 Grid.Row="0"
                 Grid.Column="0"
-                Grid.RowSpan="4" 
-                Grid.ColumnSpan="3"
-                Width="100"
-                Height="120"
-                Margin="4" 
+                Grid.RowSpan="4"
+                Width="320"
+                Height="182"
+                Margin="5,8,0,0" HorizontalAlignment="Left" VerticalAlignment="Top">
+
+                <StackPanel.Background>
+                    <ImageBrush ImageSource="/Assets/ID_Samples/utsm.png"/>
+                </StackPanel.Background>
+
+            </StackPanel>
+
+            <local:StopWatch 
+                x:Name="TimeSWatch" 
+                Grid.Row="4" 
+                Grid.Column="0" 
+                Width="Auto" 
+                Margin="5,0,0,8"
+                HorizontalAlignment="Left" VerticalAlignment="Stretch" Height="Auto">
+            </local:StopWatch>
+
+            <TextBox 
+                x:Name="WaitingTxt"
+                Grid.Row="0"
+                Grid.Column="1"
+                Grid.ColumnSpan="2"
+                Margin="0,8,0,0"
+                PlaceholderText="waiting..."
+                VerticalAlignment="Top"
+                Background="#D4D0BA"/>
+
+            <Button 
+                x:Name="ClearBtn"
+                Grid.Row="0"
+                Grid.Column="4"
+                Margin="2,2,19,2"
+                Style="{StaticResource StopWatchBtnStyle}"
                 HorizontalAlignment="Center" 
+                VerticalAlignment="Center" 
+                Click="IncrementBtn_Click">
+
+                <SymbolIcon Symbol="Delete"></SymbolIcon>
+            </Button>
+
+            <Border
+                Grid.Row="1"
+                Grid.Column="1"
+                Grid.RowSpan="3" 
+                Width="118"
+                Height="138"
+                Margin="0,0,0,0" 
                 VerticalAlignment="Center"
                 BorderBrush="Black"
-                BorderThickness="1">
-                
+                BorderThickness="1" HorizontalAlignment="Center">
+
                 <Border.Background>
                     <ImageBrush x:Name="SelectedImg" 
                         ImageSource="/Assets/Thumbnails/haloc.jpg">
@@ -54,128 +93,132 @@
                 </Border.Background>
             </Border>
 
-            <!--<ToggleSwitch 
-                x:Name="WaitingToggle"
-                OffContent="No Wait"
-                OnContent="Waiting"
-                Grid.Row="0"
-                Grid.Column="3"
-                Grid.ColumnSpan="3"
-                Width="20"
-                Height="30"
-                MinWidth="95"
-                Margin="0,0,0,0"
-                Padding="10"
-                FontSize="10"
-                FontStretch="Expanded"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Top"
-                HorizontalContentAlignment="Center" 
-                Toggled="WaitingToggle_Toggled"/>-->
-
-            <TextBox 
-                x:Name="WaitingTxt"
-                Grid.Row="0"
-                Grid.Column="6"
-                Grid.ColumnSpan="2"
-                Margin="2"
-                PlaceholderText="waiting.."
-                VerticalAlignment="Center"/>
-
-            <TextBox 
-                x:Name="ItemsTxt"
+            <Button 
+                x:Name="IncrementBtn"
                 Grid.Row="1"
                 Grid.Column="4"
-                Grid.ColumnSpan="1"
-                Width="41"
-                Height="29"
-                MinWidth="0"
-                HorizontalAlignment="Left" 
+                Margin="2,2,19,2"
+                Style="{StaticResource StopWatchBtnStyle}"
+                HorizontalAlignment="Center" 
                 VerticalAlignment="Center" 
-                Text="0"/>
+                Click="IncrementBtn_Click">
+
+                <SymbolIcon Symbol="Add"></SymbolIcon>
+            </Button>
 
             <Button 
                 x:Name="DecrementBtn"
-                Grid.Row="1"
-                Grid.Column="5"
-                Width="36"
-                Height="29"
-                Margin="2"
-                BorderBrush="Black"
-                BorderThickness="1"
-                HorizontalAlignment="Left" 
-                VerticalAlignment="Center" Click="DecrementBtn_Click">
+                Grid.Row="2"
+                Grid.Column="4"
+                Margin="2,0,19,2"
+                Style="{StaticResource StopWatchBtnStyle}"
+                HorizontalAlignment="Center" 
+                VerticalAlignment="Top" 
+                Click="DecrementBtn_Click">
 
                 <SymbolIcon Symbol="Remove"></SymbolIcon>
             </Button>
 
-            <Button 
-                x:Name="IncrementBtn"
+            <TextBlock
                 Grid.Row="1"
-                Grid.Column="6"
-                Width="36"
-                Height="29"
-                Margin="2"
-                BorderBrush="Black"
-                BorderThickness="1"
-                HorizontalAlignment="Left" 
-                VerticalAlignment="Center" Click="IncrementBtn_Click">
-                
-                <SymbolIcon Symbol="Add"></SymbolIcon>
+                Grid.Column="2"
+                Margin="0,0,0,5"
+                HorizontalAlignment="Center" 
+                VerticalAlignment="Center"
+                Text="Items"
+                FontSize="19"
+                FontWeight="Bold"  
+                FontFamily="Bodoni MT Black" 
+                Foreground="{StaticResource DarkDrkBrush}">
+            </TextBlock>
+
+            <TextBlock
+                x:Name="ItemCountLbl" 
+                Grid.Row="1"
+                Grid.Column="2"
+                Grid.RowSpan="2"
+                Margin="0,12,0,0"
+                HorizontalAlignment="Center" 
+                VerticalAlignment="Center"
+                Text="0"
+                FontSize="40"
+                FontWeight="Bold"  
+                FontFamily="Bodoni MT Black" 
+                Foreground="{StaticResource AccentBrush}">
+            </TextBlock>
+
+            <TextBlock
+                Grid.Row="2"
+                Grid.Column="2"
+                Grid.RowSpan="2"
+                Margin="0,0,0,12"
+                HorizontalAlignment="Center" 
+                VerticalAlignment="Center"
+                Text="Guests"
+                FontSize="18"
+                FontWeight="Bold"  
+                FontFamily="Bodoni MT Black" 
+                Foreground="{StaticResource DarkDrkBrush}">
+            </TextBlock>
+
+            <TextBlock
+                x:Name="GuestCountLbl" 
+                Grid.Row="3"
+                Grid.Column="2"
+                Margin="0,5,0,0"
+                HorizontalAlignment="Center" 
+                VerticalAlignment="Center"
+                Text="0"
+                FontSize="40"
+                FontWeight="Bold"  
+                FontFamily="Bodoni MT Black" 
+                Foreground="{StaticResource AccentBrush}">
+            </TextBlock>
+
+            <Button
+                x:Name="AddGuestBtn"
+                Grid.Row="3"
+                Grid.Column="4" 
+                Margin="2,0,19,2"
+                HorizontalAlignment="Center" 
+                VerticalAlignment="Top" 
+                Style="{StaticResource StopWatchBtnStyle}">
+
+                <SymbolIcon Symbol="AddFriend"></SymbolIcon>
             </Button>
 
             <Border
-                Grid.Row="2"
-                Grid.Column="4"
-                Grid.RowSpan="2"
-                Grid.ColumnSpan="4" 
-                Width="158"
-                Height="62"
+                Grid.Row="4"
+                Grid.Column="1"
+                Grid.ColumnSpan="4"
+                Margin="0,2,5,9"
                 BorderBrush="Black"
                 BorderThickness="1">
 
                 <TextBox
-                x:Name="GuestNotes"
-                Grid.Row="2"
-                Grid.Column="3"
-                TextWrapping="Wrap"
-                AcceptsReturn="True"
-                ScrollViewer.VerticalScrollMode="Auto"
-                >
+                    x:Name="GuestNotes"
+                    TextWrapping="Wrap"
+                    AcceptsReturn="True"
+                    ScrollViewer.VerticalScrollMode="Auto"
+                    PlaceholderText="notes..."
+                        Background="#D4D0BA">
                 </TextBox>
 
             </Border>
 
-            <local:StopWatch 
-                x:Name="TimeSWatch" 
-                Grid.Row="4" 
-                Grid.Column="0" 
-                Grid.RowSpan="2"
-                Grid.ColumnSpan="8"
-                Width="Auto">
-            </local:StopWatch>
-
         </Grid>
-
-        <!--StackPanel displays list of item images
-            Image Source="{Binding DataMember}"-->
-        <!--<StackPanel 
-                Orientation="Horizontal">
-            <Image Source="/Assets/Xbox.png"></Image>
-            
-        </StackPanel>-->
 
         <GridView 
             ItemsSource="{Binding}"
             Margin="22.5,0,0,0">
-            
+
             <GridView.ItemTemplate>
                 <DataTemplate>
-                    
+
                     <Grid 
                         HorizontalAlignment="Stretch" 
                         VerticalAlignment="Center">
-                        
+
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"></RowDefinition>
                             <RowDefinition Height="Auto"></RowDefinition>
@@ -186,7 +229,7 @@
                             <ColumnDefinition Width="Auto"></ColumnDefinition>
                             <ColumnDefinition Width="Auto"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        
+
                         <Image 
                             Width="103"
                             Height="130"
@@ -195,7 +238,7 @@
                     </Grid>
                 </DataTemplate>
             </GridView.ItemTemplate>
-            
+
         </GridView>
 
         <!--<GridView 
@@ -230,6 +273,26 @@
         </GridView>-->
 
         <Image Source="/Assets/Xbox.png"></Image>
-        
+
     </FlipView>
 </UserControl>
+
+
+<!--<ToggleSwitch 
+                x:Name="WaitingToggle"
+                OffContent="No Wait"
+                OnContent="Waiting"
+                Grid.Row="0"
+                Grid.Column="3"
+                Grid.ColumnSpan="3"
+                Width="20"
+                Height="30"
+                MinWidth="95"
+                Margin="0,0,0,0"
+                Padding="10"
+                FontSize="10"
+                FontStretch="Expanded"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Top"
+                HorizontalContentAlignment="Center" 
+                Toggled="WaitingToggle_Toggled"/>-->
