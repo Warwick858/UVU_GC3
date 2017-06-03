@@ -39,6 +39,7 @@ namespace UVU_GC3
         //Declare Class Vars:
         public ObservableCollection<string> itemsList;
         private DeviceWatcher scannerWatcher;
+        public StorageFolder folder = ApplicationData.Current.LocalFolder;
 
         /// <summary>
         /// To initialize control components
@@ -211,7 +212,10 @@ namespace UVU_GC3
                   }
             );
 
-            ImageScanner myScanner = await ImageScanner.FromIdAsync(deviceId);
+            
+
+            //ImageScanner myScanner = await ImageScanner.FromIdAsync(deviceId);
+            ImageScanner myScanner = await ImageScanner.FromIdAsync(deviceInfo.Id);
             var result = await myScanner.ScanFilesToFolderAsync(ImageScannerScanSource.Default, folder);
         }
 
