@@ -5,6 +5,8 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
+using Windows.Devices.Enumeration;
+using Windows.Devices.Scanners;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Storage;
@@ -36,6 +38,7 @@ namespace UVU_GC3
     {
         //Declare Class Vars:
         public ObservableCollection<string> itemsList;
+        private DeviceWatcher scannerWatcher;
 
         /// <summary>
         /// To initialize control components
@@ -101,25 +104,21 @@ namespace UVU_GC3
         } // end
 
         /// <summary>
-        /// 
+        /// To clear all data associated with the current player
         /// </summary>
         /// <param name="sender">object</param>
         /// <param name="e">RoutedEventArgs</param>
-        //private void WaitingToggle_Toggled(object sender, RoutedEventArgs e)
-        //{
-        //    //Toggle is ON
-        //    if (WaitingToggle.IsOn)
-        //    {
-        //        //Change waiting textbox background to red, and bring into focus 
-        //        WaitingTxt.Background = new SolidColorBrush(Colors.Red);
-        //        WaitingTxt.Focus(FocusState.Programmatic);
-        //    } // end if
-        //    else // toggle is OFF
-        //    {
-        //        WaitingTxt.Background = new SolidColorBrush(Colors.White);
-        //        WaitingTxt.Text = string.Empty;
-        //    } // end else
-        //} // end method WaitingToggle_Toggled()
+        private void ClearBtn_Click(object sender, RoutedEventArgs e)
+        {
+            //
+            WaitingTxt.Text = string.Empty;
+            ItemCountLbl.Text = "0";
+            GuestCountLbl.Text = "0";
+
+            //CLEAR GUEST FORM
+            //CLEAR ID IMAGE
+
+        } // end method ClearBtn_Click()
 
         /// <summary>
         /// 
@@ -161,6 +160,96 @@ namespace UVU_GC3
             ItemCountLbl.Text = count.ToString();
         } // end method IncrementBtn_Click()
 
+        //*********************OWNER***********************
 
+        private void IDPnl_PointerEntered(object sender, PointerRoutedEventArgs e)
+        {
+            IDCmdBar.ClosedDisplayMode = AppBarClosedDisplayMode.Compact;
+        }
+
+        private void IDPnl_PointerExited(object sender, PointerRoutedEventArgs e)
+        {
+            IDCmdBar.ClosedDisplayMode = AppBarClosedDisplayMode.Hidden;
+        }
+
+        private void ScanIDBtn_Click(object sender, RoutedEventArgs e)
+        {
+            InitDeviceWatcher();
+        }
+
+        void InitDeviceWatcher()
+        {
+            // Create a Device Watcher class for type Image Scanner for enumerating scanners
+            scannerWatcher = DeviceInformation.CreateWatcher(DeviceClass.ImageScanner);
+
+            scannerWatcher.Added += OnScannerAdded;
+            //scannerWatcher.Removed += OnScannerRemoved;
+            //scannerWatcher.EnumerationCompleted += OnScannerEnumerationComplete;
+        }
+
+        private async void OnScannerAdded(DeviceWatcher sender, DeviceInformation deviceInfo)
+        {
+            await
+            MainPage.Current.Dispatcher.RunAsync(
+                  Windows.UI.Core.CoreDispatcherPriority.Normal,
+                  () =>
+                  {
+                      MainPage.Current.NotifyUser(String.Format("Scanner with device id {0} has been added", deviceInfo.Id), NotifyType.StatusMessage);
+
+                     // search the device list for a device with a matching device id
+                     ScannerDataItem match = FindInList(deviceInfo.Id);
+
+                     // If we found a match then mark it as verified and return
+                     if (match != null)
+                          {
+                              match.Matched = true;
+                              return;
+                          }
+
+                     // Add the new element to the end of the list of devices
+                     AppendToList(deviceInfo);
+                  }
+            );
+
+            ImageScanner myScanner = await ImageScanner.FromIdAsync(deviceId);
+            var result = await myScanner.ScanFilesToFolderAsync(ImageScannerScanSource.Default, folder);
+        }
+
+        private void LoadIDBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void SaveIDBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        //*********************GUEST***********************
+
+        private void GuestIDPnl_PointerEntered(object sender, PointerRoutedEventArgs e)
+        {
+
+        }
+
+        private void GuestIDPnl_PointerExited(object sender, PointerRoutedEventArgs e)
+        {
+
+        }
+
+        private void DeleteGuestBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void SaveGuestBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void PrioritizeGuestBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     } // end class PlayerBox
 } // end namespace UVU_GC3

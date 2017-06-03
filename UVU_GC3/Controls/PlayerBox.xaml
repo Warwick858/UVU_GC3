@@ -30,21 +30,52 @@
             </Grid.ColumnDefinitions>
 
             <StackPanel
+                x:Name="IDPnl"
                 Grid.Row="0"
                 Grid.Column="0"
                 Grid.RowSpan="4"
                 Width="320"
                 Height="182"
-                Margin="5,8,0,0" HorizontalAlignment="Left" VerticalAlignment="Top">
+                Margin="5,8,0,0" 
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Top" 
+                PointerEntered="IDPnl_PointerEntered" 
+                PointerExited="IDPnl_PointerExited">
 
                 <StackPanel.Background>
-                    <ImageBrush ImageSource="/Assets/ID_Samples/utsm.png"/>
+                    <ImageBrush 
+                        x:Name="IDImg"
+                        ImageSource="/Assets/ID_Samples/utsm.png"/>
                 </StackPanel.Background>
 
+                <CommandBar
+                    x:Name="IDCmdBar"
+                    FlowDirection="RightToLeft"
+                    DefaultLabelPosition="Right">
+
+                    <AppBarButton 
+                        x:Name="ScanIDBtn"
+                        Icon="Camera" 
+                        Label="Scan" 
+                        Click="ScanIDBtn_Click"/>
+
+                    <AppBarButton 
+                        x:Name="LoadIDBtn"
+                        Icon="People" 
+                        Label="Load" 
+                        Click="LoadIDBtn_Click"/>
+
+                    <AppBarButton 
+                        x:Name="SaveIDBtn"
+                        Icon="Save" 
+                        Label="Save" 
+                        Click="SaveIDBtn_Click"/>
+                    
+                </CommandBar>
             </StackPanel>
 
             <local:StopWatch 
-                x:Name="TimeSWatch" 
+                x:Name="SWatch" 
                 Grid.Row="4" 
                 Grid.Column="0" 
                 Width="Auto" 
@@ -69,8 +100,8 @@
                 Margin="2,2,19,2"
                 Style="{StaticResource StopWatchBtnStyle}"
                 HorizontalAlignment="Center" 
-                VerticalAlignment="Center" 
-                Click="IncrementBtn_Click">
+                VerticalAlignment="Center" Click="ClearBtn_Click" 
+                >
 
                 <SymbolIcon Symbol="Delete"></SymbolIcon>
             </Button>
@@ -87,7 +118,8 @@
                 BorderThickness="1" HorizontalAlignment="Center">
 
                 <Border.Background>
-                    <ImageBrush x:Name="SelectedImg" 
+                    <ImageBrush 
+                        x:Name="SelectionImg" 
                         ImageSource="/Assets/Thumbnails/haloc.jpg">
                     </ImageBrush>
                 </Border.Background>
@@ -176,15 +208,90 @@
             </TextBlock>
 
             <Button
-                x:Name="AddGuestBtn"
+                x:Name="GuestBtn"
                 Grid.Row="3"
                 Grid.Column="4" 
                 Margin="2,0,19,2"
                 HorizontalAlignment="Center" 
                 VerticalAlignment="Top" 
                 Style="{StaticResource StopWatchBtnStyle}">
-
+                
                 <SymbolIcon Symbol="AddFriend"></SymbolIcon>
+                
+                <Button.Flyout>
+                    <Flyout
+                        Placement="Right">
+
+                        <StackPanel>
+                            <ItemsControl>
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <StackPanel></StackPanel>    
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto"/>
+                                            </Grid.RowDefinitions>
+
+                                            <StackPanel
+                                                x:Name="GuestIDPnl"
+                                                Width="320"
+                                                Height="182"
+                                                HorizontalAlignment="Left" 
+                                                VerticalAlignment="Top" 
+                                                PointerEntered="GuestIDPnl_PointerEntered" 
+                                                PointerExited="GuestIDPnl_PointerExited">
+
+                                                <StackPanel.Background>
+                                                    <ImageBrush 
+                                                        x:Name="GuestIDImg"
+                                                        ImageSource="{Binding}"/>
+                                                </StackPanel.Background>
+
+                                                <CommandBar
+                                                    x:Name="GuestIDCmdBar"
+                                                    FlowDirection="RightToLeft"
+                                                    DefaultLabelPosition="Right">
+
+                                                    <AppBarButton 
+                                                        x:Name="DeleteGuestBtn"
+                                                        Icon="Delete" 
+                                                        Label="Delete" 
+                                                        Click="DeleteGuestBtn_Click"/>
+
+                                                    <AppBarButton 
+                                                        x:Name="PrioritizeGuestBtn"
+                                                        Icon="Orientation" 
+                                                        Label="Make Owner" 
+                                                        Click="PrioritizeGuestBtn_Click"/>
+
+                                                    <AppBarButton 
+                                                        x:Name="SaveGuestBtn"
+                                                        Icon="Save" 
+                                                        Label="Save" 
+                                                        Click="SaveGuestBtn_Click"/>
+
+                                                </CommandBar>
+                                            </StackPanel>
+
+                                        </Grid>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+
+                            <AppBarButton
+                                x:Name="AddGuestBtn"
+                                Icon="AddFriend"
+                                Label="Add Guest"
+                                LabelPosition="Default">
+                                
+                            </AppBarButton>
+                        </StackPanel>
+                    </Flyout>
+                </Button.Flyout>
             </Button>
 
             <Border
@@ -196,7 +303,7 @@
                 BorderThickness="1">
 
                 <TextBox
-                    x:Name="GuestNotes"
+                    x:Name="NotesTxt"
                     TextWrapping="Wrap"
                     AcceptsReturn="True"
                     ScrollViewer.VerticalScrollMode="Auto"
