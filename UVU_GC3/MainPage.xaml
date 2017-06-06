@@ -10,30 +10,61 @@
     <Grid Background="#32412D">
 
         <SplitView 
+            x:Name="NavBar"
             IsPaneOpen="True" 
             DisplayMode="CompactOverlay" 
             PaneBackground="#1EA721" 
             OpenPaneLength="150" 
-            CompactPaneLength="50">
+            CompactPaneLength="50" 
+            GotFocus="NavBar_GotFocus" 
+            LostFocus="NavBar_LostFocus">
             
             <SplitView.Pane>
-                
                 <StackPanel 
                     HorizontalAlignment="Center" 
                     VerticalAlignment="Center">
                     
                     <AppBarButton 
-                        x:Name="MnuResBtn" 
-                        Style="{StaticResource SideMenuBtnStyle}" 
+                        x:Name="NavResBtn" 
+                        Style="{StaticResource NavBarBtnStyle}" 
                         Icon="Calendar" 
                         Label="Reservations"/>
+
+                    <AppBarButton 
+                        x:Name="NavSignageBtn" 
+                        Style="{StaticResource NavBarBtnStyle}" 
+                        Icon="Pictures" 
+                        Label="Signage"/>
                     
-                    <AppBarButton x:Name="MnuSignageBtn" Style="{StaticResource SideMenuBtnStyle}" Icon="Pictures" Label="Signage"/>
-                    <AppBarButton x:Name="MnuResDocsBtn" Style="{StaticResource SideMenuBtnStyle}" Icon="Page" Label="Confirmation"/>
-                    <AppBarButton x:Name="MnuOtherBtn" Style="{StaticResource SideMenuBtnStyle}" Icon="Page2" Label="Invoice"/>
-                    <AppBarButton x:Name="MnuWebsiteBtn" Style="{StaticResource SideMenuBtnStyle}" Icon="Globe" Label="Website"/>
-                    <AppBarButton x:Name="MnuSaveBtn" Style="{StaticResource SideMenuBtnStyle}" Icon="Save" Label="Save"/>
-                    <AppBarButton x:Name="MnuExitBtn" Style="{StaticResource SideMenuBtnStyle}" Icon="Clear" Label="Exit"/>
+                    <AppBarButton 
+                        x:Name="MnuResDocsBtn" 
+                        Style="{StaticResource NavBarBtnStyle}" 
+                        Icon="Page" 
+                        Label="Confirmation"/>
+                    
+                    <AppBarButton 
+                        x:Name="MnuOtherBtn" 
+                        Style="{StaticResource NavBarBtnStyle}" 
+                        Icon="Page2" 
+                        Label="Invoice"/>
+                    
+                    <AppBarButton 
+                        x:Name="MnuWebsiteBtn" 
+                        Style="{StaticResource NavBarBtnStyle}" 
+                        Icon="Globe" 
+                        Label="Website"/>
+                    
+                    <AppBarButton 
+                        x:Name="MnuSaveBtn" 
+                        Style="{StaticResource NavBarBtnStyle}" 
+                        Icon="Save" 
+                        Label="Save"/>
+                    
+                    <AppBarButton 
+                        x:Name="MnuExitBtn" 
+                        Style="{StaticResource NavBarBtnStyle}" 
+                        Icon="Clear" 
+                        Label="Exit"/>
                 
                 </StackPanel>
             </SplitView.Pane>

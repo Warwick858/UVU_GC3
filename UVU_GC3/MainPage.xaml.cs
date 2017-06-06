@@ -71,5 +71,31 @@ namespace UVU_GC3
             //    StatusBlock.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
             //}
         }
+
+        private void NavBar_GotFocus(object sender, RoutedEventArgs e)
+        {
+            DependencyObject splitView = sender as DependencyObject;
+            int count = VisualTreeHelper.GetChildrenCount(splitView);
+
+            for (int i = 0; i < count; i++)
+            {
+                DependencyObject child = VisualTreeHelper.GetChild(splitView, i);
+                AppBarButton button = child as AppBarButton;
+                button.IsCompact = false;
+            }
+        }
+
+        private void NavBar_LostFocus(object sender, RoutedEventArgs e)
+        {
+            DependencyObject splitView = sender as DependencyObject;
+            int count = VisualTreeHelper.GetChildrenCount(splitView);
+
+            for (int i = 0; i < count; i++)
+            {
+                DependencyObject child = VisualTreeHelper.GetChild(splitView, i);
+                AppBarButton button = child as AppBarButton;
+                button.IsCompact = true;
+            }
+        }
     }
 }

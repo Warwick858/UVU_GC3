@@ -10,6 +10,7 @@ using Windows.Devices.Scanners;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Storage;
+using Windows.Storage.Search;
 using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -39,7 +40,7 @@ namespace UVU_GC3
         //Declare Class Vars:
         public ObservableCollection<string> itemsList;
         private DeviceWatcher scannerWatcher;
-        public StorageFolder folder = ApplicationData.Current.LocalFolder;
+        //public StorageFolder folder = ApplicationData.Current.LocalFolder;
 
         /// <summary>
         /// To initialize control components
@@ -47,7 +48,6 @@ namespace UVU_GC3
         public PlayerBox()
         {
             this.InitializeComponent();
-
             //LoadItems();
             LoadItemsAsync();
         } // end constructor
@@ -66,7 +66,6 @@ namespace UVU_GC3
             if (flipView.SelectedIndex.Equals(1))
             {
                 //LoadItemsAsync();
-
                 //LoadItems();
             } // end if
         } // end method PlayerFlipView_SelectionChanged()
@@ -74,12 +73,8 @@ namespace UVU_GC3
         private void LoadItems()
         {
             itemsList = new ObservableCollection<string>();
-
             itemsList.Add("/Assets/Thumbnails/battleborn.jpg");
             itemsList.Add("/Assets/Thumbnails/battlefield.jpg");
-            
-
-            //
             this.DataContext = itemsList;
         }
 
@@ -113,12 +108,12 @@ namespace UVU_GC3
         {
             //
             WaitingTxt.Text = string.Empty;
+            NotesTxt.Text = string.Empty;
             ItemCountLbl.Text = "0";
             GuestCountLbl.Text = "0";
 
             //CLEAR GUEST FORM
             //CLEAR ID IMAGE
-
         } // end method ClearBtn_Click()
 
         /// <summary>
@@ -183,6 +178,10 @@ namespace UVU_GC3
             // Create a Device Watcher class for type Image Scanner for enumerating scanners
             scannerWatcher = DeviceInformation.CreateWatcher(DeviceClass.ImageScanner);
 
+            //StorageFolder testFolder = await StorageFolder.GetFolderFromPathAsync(@"D:\Pictures\Test");
+            //ImageScanner myScanner = await ImageScanner.FromIdAsync("{4D36E967-E325-11CE-BFC1-08002BE10318}");
+            //var result = await myScanner.ScanFilesToFolderAsync(ImageScannerScanSource.Default, testFolder);
+
             scannerWatcher.Added += OnScannerAdded;
             //scannerWatcher.Removed += OnScannerRemoved;
             //scannerWatcher.EnumerationCompleted += OnScannerEnumerationComplete;
@@ -195,28 +194,35 @@ namespace UVU_GC3
                   Windows.UI.Core.CoreDispatcherPriority.Normal,
                   () =>
                   {
-                      MainPage.Current.NotifyUser(String.Format("Scanner with device id {0} has been added", deviceInfo.Id), NotifyType.StatusMessage);
+                      string stuff = "test";
 
-                     // search the device list for a device with a matching device id
-                     ScannerDataItem match = FindInList(deviceInfo.Id);
+                      //MainPage.Current.NotifyUser(String.Format("Scanner with device id {0} has been added", deviceInfo.Id), NotifyType.StatusMessage);
 
-                     // If we found a match then mark it as verified and return
-                     if (match != null)
-                          {
-                              match.Matched = true;
-                              return;
-                          }
+                      //// search the device list for a device with a matching device id
+                      //ScannerDataItem match = FindInList(deviceInfo.Id);
 
-                     // Add the new element to the end of the list of devices
-                     AppendToList(deviceInfo);
+                      //// If we found a match then mark it as verified and return
+                      //if (match != null)
+                      //{
+                      //    match.Matched = true;
+                      //    return;
+                      //}
+
+                      //// Add the new element to the end of the list of devices
+                      //AppendToList(deviceInfo);
                   }
             );
 
-            
+            //var library = await StorageLibrary.GetLibraryAsync(KnownLibraryId.Pictures);
+            //var folders = library.Folders;
+
+            StorageFolder testFolder = await StorageFolder.GetFolderFromPathAsync(@"D:\Pictures\Test");
 
             //ImageScanner myScanner = await ImageScanner.FromIdAsync(deviceId);
+
+            //4D36E967-E325-11CE-BFC1-08002BE10318
             ImageScanner myScanner = await ImageScanner.FromIdAsync(deviceInfo.Id);
-            var result = await myScanner.ScanFilesToFolderAsync(ImageScannerScanSource.Default, folder);
+            var result = await myScanner.ScanFilesToFolderAsync(ImageScannerScanSource.Default, testFolder);
         }
 
         private void LoadIDBtn_Click(object sender, RoutedEventArgs e)
@@ -251,7 +257,7 @@ namespace UVU_GC3
 
         }
 
-        private void PrioritizeGuestBtn_Click(object sender, RoutedEventArgs e)
+        private void PromoteGuestBtn_Click(object sender, RoutedEventArgs e)
         {
 
         }

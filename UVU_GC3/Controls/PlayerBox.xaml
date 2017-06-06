@@ -215,81 +215,84 @@
                 HorizontalAlignment="Center" 
                 VerticalAlignment="Top" 
                 Style="{StaticResource StopWatchBtnStyle}">
-                
+
                 <SymbolIcon Symbol="AddFriend"></SymbolIcon>
-                
+
                 <Button.Flyout>
                     <Flyout
                         Placement="Right">
 
-                        <StackPanel>
-                            <ItemsControl>
-                                <ItemsControl.ItemsPanel>
-                                    <ItemsPanelTemplate>
-                                        <StackPanel></StackPanel>    
-                                    </ItemsPanelTemplate>
-                                </ItemsControl.ItemsPanel>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            
+                            <AppBarButton
+                                x:Name="AddGuestBtn"
+                                Grid.Row="0"
+                                Icon="AddFriend"
+                                Label="Add Guest"
+                                LabelPosition="Default" 
+                                HorizontalAlignment="Center" 
+                                VerticalAlignment="Center">
+                            </AppBarButton>
+                            
+                            <ListView
+                                Grid.Row="1" 
+                                Width="320"
+                                Height="182"
+                                VerticalAlignment="Center">
+                                
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
                                         <Grid>
                                             <Grid.RowDefinitions>
                                                 <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
                                             </Grid.RowDefinitions>
 
-                                            <StackPanel
-                                                x:Name="GuestIDPnl"
+                                            <Image
+                                                Grid.Row="0"
                                                 Width="320"
                                                 Height="182"
-                                                HorizontalAlignment="Left" 
-                                                VerticalAlignment="Top" 
-                                                PointerEntered="GuestIDPnl_PointerEntered" 
-                                                PointerExited="GuestIDPnl_PointerExited">
+                                                Source="/Assets/ID_Samples/utsm.png">
+                                                
+                                            </Image>
 
-                                                <StackPanel.Background>
-                                                    <ImageBrush 
-                                                        x:Name="GuestIDImg"
-                                                        ImageSource="{Binding}"/>
-                                                </StackPanel.Background>
+                                            <CommandBar
+                                                x:Name="GuestIDCmdBar"
+                                                Grid.Row="1"
+                                                FlowDirection="RightToLeft"
+                                                DefaultLabelPosition="Right">
 
-                                                <CommandBar
-                                                    x:Name="GuestIDCmdBar"
-                                                    FlowDirection="RightToLeft"
-                                                    DefaultLabelPosition="Right">
+                                                <AppBarButton 
+                                                    x:Name="DeleteGuestBtn"
+                                                    Icon="Delete" 
+                                                    Label="Delete" 
+                                                    Click="DeleteGuestBtn_Click"/>
 
-                                                    <AppBarButton 
-                                                        x:Name="DeleteGuestBtn"
-                                                        Icon="Delete" 
-                                                        Label="Delete" 
-                                                        Click="DeleteGuestBtn_Click"/>
+                                                <AppBarButton 
+                                                    x:Name="PromoteGuestBtn"
+                                                    Icon="Orientation" 
+                                                    Label="Promote" 
+                                                    Click="PromoteGuestBtn_Click"/>
 
-                                                    <AppBarButton 
-                                                        x:Name="PrioritizeGuestBtn"
-                                                        Icon="Orientation" 
-                                                        Label="Make Owner" 
-                                                        Click="PrioritizeGuestBtn_Click"/>
+                                                <AppBarButton 
+                                                    x:Name="SaveGuestBtn"
+                                                    Icon="Save" 
+                                                    Label="Save" 
+                                                    Click="SaveGuestBtn_Click"/>
 
-                                                    <AppBarButton 
-                                                        x:Name="SaveGuestBtn"
-                                                        Icon="Save" 
-                                                        Label="Save" 
-                                                        Click="SaveGuestBtn_Click"/>
-
-                                                </CommandBar>
-                                            </StackPanel>
-
+                                            </CommandBar>
                                         </Grid>
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>
-                            </ItemsControl>
+                            </ListView>
 
-                            <AppBarButton
-                                x:Name="AddGuestBtn"
-                                Icon="AddFriend"
-                                Label="Add Guest"
-                                LabelPosition="Default">
-                                
-                            </AppBarButton>
-                        </StackPanel>
+
+
+                        </Grid>
                     </Flyout>
                 </Button.Flyout>
             </Button>
