@@ -7,120 +7,204 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Background="#32412D">
+    <Grid
+        x:Name="MainGrid"
+        Background="#32412D">
+        
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.02*"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition Width="0.1*"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition Width="0.1*"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
 
-        <SplitView 
-            x:Name="NavBar"
-            IsPaneOpen="True" 
-            DisplayMode="CompactOverlay" 
-            PaneBackground="#1EA721" 
-            OpenPaneLength="150" 
-            CompactPaneLength="50" 
-            GotFocus="NavBar_GotFocus" 
-            LostFocus="NavBar_LostFocus">
+        <!--IsOpen="True"
+            ClosedDisplayMode="Minimal"
+            OverflowButtonVisibility="Visible"
+            FlowDirection="RightToLeft"-->
+
+        <CommandBar
+            x:Name="NavCmdBar"
+            Grid.Row="0"
+            Grid.Column="0"
+            Grid.ColumnSpan="6" 
+            VerticalAlignment="Top" 
+            HorizontalContentAlignment="Stretch" 
+            VerticalContentAlignment="Center"
+            ClosedDisplayMode="Minimal"
+            DefaultLabelPosition="Right"
+            RequestedTheme="Dark"
             
-            <SplitView.Pane>
-                <StackPanel 
-                    HorizontalAlignment="Center" 
-                    VerticalAlignment="Center">
-                    
-                    <AppBarButton 
-                        x:Name="NavResBtn" 
-                        Style="{StaticResource NavBarBtnStyle}" 
-                        Icon="Calendar" 
-                        Label="Reservations"/>
+            Opening="NavCmdBar_Opening" 
+            Closing="NavCmdBar_Closing" 
+            GotFocus="NavCmdBar_GotFocus" 
+            LostFocus="NavCmdBar_LostFocus">
 
-                    <AppBarButton 
-                        x:Name="NavSignageBtn" 
-                        Style="{StaticResource NavBarBtnStyle}" 
-                        Icon="Pictures" 
-                        Label="Signage"/>
-                    
-                    <AppBarButton 
-                        x:Name="MnuResDocsBtn" 
-                        Style="{StaticResource NavBarBtnStyle}" 
-                        Icon="Page" 
-                        Label="Confirmation"/>
-                    
-                    <AppBarButton 
-                        x:Name="MnuOtherBtn" 
-                        Style="{StaticResource NavBarBtnStyle}" 
-                        Icon="Page2" 
-                        Label="Invoice"/>
-                    
-                    <AppBarButton 
-                        x:Name="MnuWebsiteBtn" 
-                        Style="{StaticResource NavBarBtnStyle}" 
-                        Icon="Globe" 
-                        Label="Website"/>
-                    
-                    <AppBarButton 
-                        x:Name="MnuSaveBtn" 
-                        Style="{StaticResource NavBarBtnStyle}" 
-                        Icon="Save" 
-                        Label="Save"/>
-                    
-                    <AppBarButton 
-                        x:Name="MnuExitBtn" 
-                        Style="{StaticResource NavBarBtnStyle}" 
-                        Icon="Clear" 
-                        Label="Exit"/>
-                
-                </StackPanel>
-            </SplitView.Pane>
+            <AppBarButton 
+                x:Name="AddNavBtn"
+                Icon="Add"
+                Label="Add Player" 
+                Click="AddNavBtn_Click"/>
+
+            <AppBarSeparator/>
+
+            <AppBarButton 
+                x:Name="ResNavBtn" 
+                Icon="Calendar" 
+                Label="Reservations" 
+                Click="ResNavBtn_Click"/>
+
+            <AppBarButton 
+                x:Name="SignageNavBtn" 
+                Icon="Pictures" 
+                Label="Event Signage" 
+                Click="SignageNavBtn_Click"/>
             
-            <SplitView.Content>
-                
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition></RowDefinition>
-                        <RowDefinition></RowDefinition>
-                        <RowDefinition></RowDefinition>
-                        <RowDefinition></RowDefinition>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="0.02*"></ColumnDefinition>
-                        <ColumnDefinition></ColumnDefinition>
-                        <ColumnDefinition Width="0.1*"></ColumnDefinition>
-                        <ColumnDefinition></ColumnDefinition>
-                        <ColumnDefinition Width="0.1*"></ColumnDefinition>
-                        <ColumnDefinition></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
+            <AppBarButton 
+                x:Name="ConfirmNavBtn" 
+                Icon="Page" 
+                Label="Event Confirmation" 
+                Click="ConfirmNavBtn_Click"/>
 
-                    <StackPanel
-                        Grid.Row="0"
-                        Grid.Column="1">
-                        
-                    </StackPanel>
-                    
-                    <local:PlayerBox 
-                        Grid.Row="1"
-                        Grid.Column="1"
-                        Grid.RowSpan="1"
-                        Grid.ColumnSpan="1"
-                        Height="Auto" 
-                        Width="Auto"
-                        HorizontalAlignment="Left" 
-                        VerticalAlignment="Center" 
-                        />
+            <AppBarButton 
+                x:Name="ReceiptNavBtn" 
+                Icon="Page2" 
+                Label="Event Receipt" 
+                Click="ReceiptNavBtn_Click"/>
 
-                    <local:PlayerBox 
-                        Grid.Row="1"
-                        Grid.Column="3"
-                        Grid.RowSpan="1"
-                        Grid.ColumnSpan="1"
-                        Height="Auto" 
-                        Width="Auto"
-                        HorizontalAlignment="Left" 
-                        VerticalAlignment="Center" 
-                        />
+            <AppBarSeparator/>
 
-                </Grid>
-                
-            </SplitView.Content>
-        </SplitView>
+            <AppBarButton 
+                x:Name="WebsiteNavBtn" 
+                Icon="Globe" 
+                Label="Website" 
+                Click="WebsiteNavBtn_Click"/>
 
-        <VisualStateManager.VisualStateGroups>
+            <AppBarButton 
+                x:Name="DiagramNavBtn"
+                Icon="MapDrive"
+                Label="Gaming Diagram" 
+                Click="DiagramNavBtn_Click"/>
+
+            <AppBarButton 
+                x:Name="YouTubeNavBtn"
+                Icon="SlideShow"
+                Label="YouTube Playlist" 
+                Click="YouTubeNavBtn_Click"/>
+
+            <AppBarSeparator/>
+
+            <AppBarButton 
+                x:Name="StatsNavBtn"
+                Icon="Calculator"
+                Label="Statistics" 
+                Click="StatsNavBtn_Click"/>
+
+            <CommandBar.SecondaryCommands>
+                <AppBarButton 
+                    x:Name="OpenNavBtn" 
+                    Icon="OpenFile" 
+                    Label="Open" 
+                    Click="OpenNavBtn_Click"/>
+
+                <AppBarButton 
+                    x:Name="SaveNavBtn" 
+                    Icon="Save" 
+                    Label="Save" 
+                    Click="SaveNavBtn_Click"/>
+
+                <AppBarButton 
+                    x:Name="ExitNavBtn" 
+                    Icon="Clear" 
+                    Label="Exit" 
+                    Click="ExitNavBtn_Click"/>
+            </CommandBar.SecondaryCommands>
+
+            <CommandBar.Content>
+                <TextBlock 
+                    x:Name="DateTimeNavContent"
+                    Margin="20,0,0,0"
+                    Text="DateTime Here"/>
+            </CommandBar.Content>
+
+        </CommandBar>
+
+        <!--<Border
+            Grid.Row="0"
+            Grid.Column="1"
+            BorderBrush="Black"
+            BorderThickness="5"
+            CornerRadius="50"
+            >
+            
+        </Border>-->
+
+        <Rectangle 
+            x:Name="Stn4Rect"
+            Grid.Row="0"
+            Grid.Column="1"
+            Fill="{StaticResource DarkDrkBrush}" 
+            HorizontalAlignment="Stretch" 
+            VerticalAlignment="Stretch" 
+            Height="270" 
+            Width="581"
+            RadiusX="50"
+            RadiusY="50"
+            StrokeDashCap="Flat" 
+            StrokeDashOffset="1.5" 
+            StrokeDashArray="1" 
+            Stroke="{StaticResource AccentBrush}" 
+            StrokeThickness="3" 
+            Canvas.ZIndex="-1"
+            AllowDrop="True" 
+            
+            Drop="Stn4Rect_Drop" DragOver="Stn4Rect_DragOver" >
+            
+        </Rectangle>
+
+        <TextBlock 
+            Grid.Row="0"
+            Grid.Column="1"
+            Text="Drag Here&#x0a; Station 4" 
+            HorizontalAlignment="Center" 
+            VerticalAlignment="Center" 
+            Foreground="{StaticResource AccentBrush}"/>
+
+        <local:PlayerBox 
+            x:Name="PBox1"
+            Grid.Row="0"
+            Grid.Column="3"
+            Grid.RowSpan="1"
+            Grid.ColumnSpan="1"
+            Height="Auto" 
+            Width="Auto"
+            HorizontalAlignment="Left" 
+            VerticalAlignment="Center" 
+            />
+
+        <local:PlayerBox 
+            x:Name="PBox2"
+            Grid.Row="1"
+            Grid.Column="3"
+            Grid.RowSpan="1"
+            Grid.ColumnSpan="1"
+            Height="Auto" 
+            Width="Auto"
+            HorizontalAlignment="Left" 
+            VerticalAlignment="Center" 
+            />
+
+    </Grid>
+
+    <!--<VisualStateManager.VisualStateGroups>
             <VisualStateGroup>
                 <VisualState x:Name="Normal">
                     <VisualState.StateTriggers>
@@ -140,7 +224,6 @@
                     </VisualState.StateTriggers>
                 </VisualState>
             </VisualStateGroup>
-        </VisualStateManager.VisualStateGroups>
+        </VisualStateManager.VisualStateGroups>-->
 
-    </Grid>
 </Page>

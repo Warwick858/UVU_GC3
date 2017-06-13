@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
+using Windows.ApplicationModel.DataTransfer;
 using Windows.Devices.Enumeration;
 using Windows.Devices.Scanners;
 using Windows.Foundation;
@@ -260,6 +261,48 @@ namespace UVU_GC3
         private void PromoteGuestBtn_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void PBox_DragOver(object sender, DragEventArgs e)
+        {
+            e.AcceptedOperation = DataPackageOperation.Move;
+        }
+
+        private async void PBox_Drop(object sender, DragEventArgs e)
+        {
+            if (e.DataView.Contains(StandardDataFormats.StorageItems))
+            {
+                var items = await e.DataView.GetStorageItemsAsync();
+                if (items.Count > 0)
+                {
+                    //var storageFile = items[0] as StorageFile;
+                    //var bitmapImage = new BitmapImage();
+                    //bitmapImage.SetSource(await storageFile.OpenAsync(FileAccessMode.Read));
+                    //// Set the image on the main page to the dropped image
+                    //Image.Source = bitmapImage;
+                }
+            }
+
+            
+        }
+
+        private void PBox_ManipulationStarted(object sender, ManipulationStartedRoutedEventArgs e)
+        {
+            Opacity = 0.5;
+        }
+
+        private void PBox_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
+        {
+
+
+            var ct = (CompositeTransform)RenderTransform ?? new CompositeTransform { CenterX = 0.5, CenterY = 0.5 };
+            ct.TranslateX += e.Delta.Translation.X;
+            ct.TranslateY += e.Delta.Translation.Y;
+        }
+
+        private void PBox_ManipulationCompleted(object sender, ManipulationCompletedRoutedEventArgs e)
+        {
+            Opacity = 1;
         }
     } // end class PlayerBox
 } // end namespace UVU_GC3

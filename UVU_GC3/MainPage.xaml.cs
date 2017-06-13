@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using Windows.ApplicationModel.DataTransfer;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -72,30 +73,110 @@ namespace UVU_GC3
             //}
         }
 
-        private void NavBar_GotFocus(object sender, RoutedEventArgs e)
-        {
-            DependencyObject splitView = sender as DependencyObject;
-            int count = VisualTreeHelper.GetChildrenCount(splitView);
 
-            for (int i = 0; i < count; i++)
-            {
-                DependencyObject child = VisualTreeHelper.GetChild(splitView, i);
-                AppBarButton button = child as AppBarButton;
-                button.IsCompact = false;
-            }
+        private void NavCmdBar_Opening(object sender, object e)
+        {
+            //CommandBar cb = sender as CommandBar;
+            //if (cb != null) cb.Background.Opacity = 1.0;
         }
 
-        private void NavBar_LostFocus(object sender, RoutedEventArgs e)
+        private void NavCmdBar_Closing(object sender, object e)
         {
-            DependencyObject splitView = sender as DependencyObject;
-            int count = VisualTreeHelper.GetChildrenCount(splitView);
-
-            for (int i = 0; i < count; i++)
-            {
-                DependencyObject child = VisualTreeHelper.GetChild(splitView, i);
-                AppBarButton button = child as AppBarButton;
-                button.IsCompact = true;
-            }
+            //CommandBar cb = sender as CommandBar;
+            //if (cb != null) cb.Background.Opacity = 0.3;
         }
-    }
-}
+
+        private void NavCmdBar_GotFocus(object sender, RoutedEventArgs e)
+        {
+            //CommandBar cb = sender as CommandBar;
+            //cb.ClosedDisplayMode = AppBarClosedDisplayMode.Compact;
+        }
+
+        private void NavCmdBar_LostFocus(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void AddNavBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ResNavBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void SignageNavBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ConfirmNavBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ReceiptNavBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void WebsiteNavBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void DiagramNavBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void YouTubeNavBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void StatsNavBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void OpenNavBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void SaveNavBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ExitNavBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Stn4Rect_Drop(object sender, DragEventArgs e)
+        {
+            //PlayerBox pBox = sender as PlayerBox;
+
+            //pBox.SetValue(Grid.RowProperty, 0);
+            //pBox.SetValue(Grid.ColumnProperty, 1);
+
+            var point = e.GetPosition(Stn4Rect);
+            Canvas.SetLeft(PBox1, (point.X));
+            Canvas.SetTop(PBox1, (point.Y));
+
+            //PlayerBox pb = e.Data as PlayerBox;
+
+            //MainGrid.SetValue(Grid.RowProperty)
+            //Grid.SetColumn(pBox, 1);
+        }
+
+        private void Stn4Rect_DragOver(object sender, DragEventArgs e)
+        {
+            e.AcceptedOperation = DataPackageOperation.Move;
+        }
+    } // end class MainPage
+} // end namespace UVU_GC3
