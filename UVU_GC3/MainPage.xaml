@@ -9,7 +9,8 @@
 
     <Grid
         x:Name="MainGrid"
-        Background="#32412D">
+        Background="#32412D"
+        AllowDrop="True">
         
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>
@@ -188,19 +189,30 @@
             Width="Auto"
             HorizontalAlignment="Left" 
             VerticalAlignment="Center" 
+
             />
 
         <local:PlayerBox 
             x:Name="PBox2"
             Grid.Row="1"
             Grid.Column="3"
-            Grid.RowSpan="1"
-            Grid.ColumnSpan="1"
             Height="Auto" 
             Width="Auto"
             HorizontalAlignment="Left" 
             VerticalAlignment="Center" 
-            />
+            
+            ManipulationMode="TranslateX, TranslateY"  
+            ManipulationStarted="PBox2_ManipulationStarted"
+            ManipulationDelta="PBox2_ManipulationDelta"
+            ManipulationCompleted="PBox2_ManipulationCompleted"
+            
+            PointerReleased="PBox2_PointerReleased" >
+
+            <local:PlayerBox.RenderTransform>
+                <CompositeTransform x:Name="composite"></CompositeTransform>
+            </local:PlayerBox.RenderTransform>
+
+        </local:PlayerBox>
 
     </Grid>
 

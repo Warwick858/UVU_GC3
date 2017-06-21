@@ -13,6 +13,7 @@ using Windows.Foundation.Collections;
 using Windows.Storage;
 using Windows.Storage.Search;
 using Windows.UI;
+using Windows.UI.Input;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -43,6 +44,10 @@ namespace UVU_GC3
         private DeviceWatcher scannerWatcher;
         //public StorageFolder folder = ApplicationData.Current.LocalFolder;
 
+        private bool isDragging;
+        private PointerPoint clickPoint;
+        private Pointer pointer;
+
         /// <summary>
         /// To initialize control components
         /// </summary>
@@ -51,6 +56,7 @@ namespace UVU_GC3
             this.InitializeComponent();
             //LoadItems();
             LoadItemsAsync();
+
         } // end constructor
 
         /// <summary>
@@ -263,46 +269,156 @@ namespace UVU_GC3
 
         }
 
+        //*********************END GUEST***********************
+
         private void PBox_DragOver(object sender, DragEventArgs e)
         {
-            e.AcceptedOperation = DataPackageOperation.Move;
+            //e.AcceptedOperation = DataPackageOperation.Move;
         }
 
         private async void PBox_Drop(object sender, DragEventArgs e)
         {
-            if (e.DataView.Contains(StandardDataFormats.StorageItems))
+            //if (e.DataView.Contains(StandardDataFormats.StorageItems))
+            //{
+            //    var items = await e.DataView.GetStorageItemsAsync();
+            //    if (items.Count > 0)
+            //    {
+            //        //var storageFile = items[0] as StorageFile;
+            //        //var bitmapImage = new BitmapImage();
+            //        //bitmapImage.SetSource(await storageFile.OpenAsync(FileAccessMode.Read));
+            //        //// Set the image on the main page to the dropped image
+            //        //Image.Source = bitmapImage;
+            //    }
+            //}
+        }
+
+        //private void PBox_ManipulationStarted(object sender, ManipulationStartedRoutedEventArgs e)
+        //{
+        //    //Opacity = 0.5;
+        //}
+
+        //private void PBox_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
+        //{
+        //    //var ct = (CompositeTransform)RenderTransform ?? new CompositeTransform { CenterX = 0.5, CenterY = 0.5 };
+        //    //ct.TranslateX += e.Delta.Translation.X;
+        //    //ct.TranslateY += e.Delta.Translation.Y;
+        //}
+
+        //private void PBox_ManipulationCompleted(object sender, ManipulationCompletedRoutedEventArgs e)
+        //{
+        //    //Opacity = 1;
+        //}
+
+        //SILVERLIGHT ATTEMPT
+
+        //private void Control_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        //{
+        //    isDragging = true;
+        //    var draggableControl = sender as UserControl;
+        //    clickPoint = e.GetPosition(this);
+        //    draggableControl.CaptureMouse();
+        //}
+
+        //private void Control_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        //{
+        //    isDragging = false;
+        //    var draggable = sender as UserControl;
+        //    draggable.ReleaseMouseCapture();
+        //}
+
+        //private void Control_MouseMove(object sender, MouseEventArgs e)
+        //{
+        //    var draggableControl = sender as UserControl;
+
+        //    if (isDragging && draggableControl != null)
+        //    {
+        //        Point currentPosition = e.GetPosition(this.Parent as UIElement);
+
+        //        var transform = draggableControl.RenderTransform as TranslateTransform;
+        //        if (transform == null)
+        //        {
+        //            transform = new TranslateTransform();
+        //            draggableControl.RenderTransform = transform;
+        //        }
+
+        //        transform.X = currentPosition.X - clickPoint.X;
+        //        transform.Y = currentPosition.Y - clickPoint.Y;
+        //    }
+        //}
+
+        //*******************************
+
+        private void PBox_PointerPressed(object sender, PointerRoutedEventArgs e)
+        {
+            this.CanDrag = true;
+            isDragging = true;
+            var draggedBox = sender as PlayerBox; // UserControl
+
+            clickPoint = e.GetCurrentPoint(this.Parent as UIElement);
+            draggedBox.CapturePointer(e.Pointer);
+        }
+
+        private void PBox_PointerMoved(object sender, PointerRoutedEventArgs e)
+        {
+            var draggedBox = sender as PlayerBox; // UserControl
+
+            if (isDragging && draggedBox != null)
             {
-                var items = await e.DataView.GetStorageItemsAsync();
-                if (items.Count > 0)
+                //Point currentPosition = e.GetPosition(this.Parent as UIElement);
+                PointerPoint currentPosition = e.GetCurrentPoint(this.Parent as UIElement);
+                //PointerPoint currentPosition = e.GetCurrentPoint(draggableControl);
+                
+                var transform = draggedBox.RenderTransform as TranslateTransform;
+                if (transform == null)
                 {
-                    //var storageFile = items[0] as StorageFile;
-                    //var bitmapImage = new BitmapImage();
-                    //bitmapImage.SetSource(await storageFile.OpenAsync(FileAccessMode.Read));
-                    //// Set the image on the main page to the dropped image
-                    //Image.Source = bitmapImage;
+                    transform = new TranslateTransform();
+                    draggedBox.RenderTransform = transform;
                 }
-            }
 
-            
-        }
+                //if (PBoxTranslate == null)
+                //{
+                //    PBoxTranslate = new TranslateTransform();
+                //    draggedBox.RenderTransform = PBoxTranslate;
+                //}
 
-        private void PBox_ManipulationStarted(object sender, ManipulationStartedRoutedEventArgs e)
+                //draggableControl.RenderTransformOrigin = new Point(0.5, 0.5);
+                ////RotateTransform rt = new RotateTransform();
+                //TranslateTransform tt = new TranslateTransform();
+                //draggableControl.RenderTransform = tt;
+                //draggableControl.RenderTransform.
+
+                //transform.X = currentPosition.X - clickPoint.X;
+                //transform.X = (clickPoint.Position.X - currentPosition.Position.X);
+                //transform.X = currentPosition.Position.X;
+                transform.X = currentPosition.Position.X - clickPoint.Position.X;
+                //PBoxTranslate.X = (currentPosition.Position.X - clickPoint.Position.X);
+
+
+                //transform.Y = currentPosition.Y - clickPoint.Y;
+                //transform.Y = (clickPoint.Position.Y - currentPosition.Position.Y);
+                //transform.Y = currentPosition.Position.Y;
+                transform.Y = currentPosition.Position.Y - clickPoint.Position.Y;
+                //PBoxTranslate.Y = (currentPosition.Position.Y - clickPoint.Position.Y);
+
+
+                //MUST BE DONE IN MAINPAGE???
+
+            } // end if
+        } // end method PBox_PointerMoved()
+
+        private void PBox_PointerReleased(object sender, PointerRoutedEventArgs e)
         {
-            Opacity = 0.5;
-        }
+            this.CanDrag = false;
+            isDragging = false;
+            var draggedBox = sender as PlayerBox; // UserControl
 
-        private void PBox_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
-        {
+            //PointerPoint currentPosition = e.GetCurrentPoint(this.Parent as UIElement);
+            //var transform = draggedBox.RenderTransform as TranslateTransform;
+            //transform.X = (currentPosition.Position.X - clickPoint.Position.X);
+            //transform.Y = (currentPosition.Position.Y - clickPoint.Position.Y);
 
-
-            var ct = (CompositeTransform)RenderTransform ?? new CompositeTransform { CenterX = 0.5, CenterY = 0.5 };
-            ct.TranslateX += e.Delta.Translation.X;
-            ct.TranslateY += e.Delta.Translation.Y;
-        }
-
-        private void PBox_ManipulationCompleted(object sender, ManipulationCompletedRoutedEventArgs e)
-        {
-            Opacity = 1;
+            draggedBox.ReleasePointerCapture(e.Pointer);
+            //Point relativePoint = TransformToVisual(Parent as UIElement);
         }
     } // end class PlayerBox
 } // end namespace UVU_GC3

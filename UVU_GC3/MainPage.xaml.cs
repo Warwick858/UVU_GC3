@@ -6,12 +6,15 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.ApplicationModel.DataTransfer;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Storage;
+using Windows.UI.Input;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 
 //									     ____.           .____             _____  _______   
@@ -33,6 +36,7 @@ namespace UVU_GC3
     {
 
         public static MainPage Current;
+        private PointerPoint clickPoint;
 
         public enum NotifyType
         {
@@ -157,26 +161,66 @@ namespace UVU_GC3
 
         }
 
-        private void Stn4Rect_Drop(object sender, DragEventArgs e)
-        {
-            //PlayerBox pBox = sender as PlayerBox;
-
-            //pBox.SetValue(Grid.RowProperty, 0);
-            //pBox.SetValue(Grid.ColumnProperty, 1);
-
-            var point = e.GetPosition(Stn4Rect);
-            Canvas.SetLeft(PBox1, (point.X));
-            Canvas.SetTop(PBox1, (point.Y));
-
-            //PlayerBox pb = e.Data as PlayerBox;
-
-            //MainGrid.SetValue(Grid.RowProperty)
-            //Grid.SetColumn(pBox, 1);
-        }
-
         private void Stn4Rect_DragOver(object sender, DragEventArgs e)
         {
-            e.AcceptedOperation = DataPackageOperation.Move;
+            //e.AcceptedOperation = DataPackageOperation.Move;
+        }
+
+        private async void Stn4Rect_Drop(object sender, DragEventArgs e)
+        {
+            //if (e.DataView.Contains(StandardDataFormats.Text))
+            //{
+            //    var items = await e.DataView.GetDataAsync();
+
+            //    //var items = await e.DataView.GetDataAsync(PlayerBox.Type);
+            //    if (items.Count > 0)
+            //    {
+            //        var storageFile = items[0] as PlayerBox;
+            //        var bitmapImage = new BitmapImage();
+            //        bitmapImage.SetSource(await storageFile.OpenAsync(FileAccessMode.Read));
+            //        // Set the image on the main page to the dropped image
+            //        Image.Source = bitmapImage;
+            //    }
+            //}
+        }
+
+        private void PBox2_PointerReleased(object sender, PointerRoutedEventArgs e)
+        {
+
+        }
+
+
+
+        private void PBox2_ManipulationStarted(object sender, ManipulationStartedRoutedEventArgs e)
+        {
+
+        }
+
+        private void PBox2_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
+        {
+            composite.TranslateX += e.Delta.Translation.X;
+            composite.TranslateY += e.Delta.Translation.Y;
+        }
+
+        private void PBox2_ManipulationCompleted(object sender, ManipulationCompletedRoutedEventArgs e)
+        {
+            if (e.Position.Y < 300)
+            {
+
+                var control = sender as UserControl;
+
+                //control.SetValue(Canvas.LeftProperty, 200);
+                //control.SetValue(Canvas.TopProperty, 100);
+
+                Grid grid = MainGrid as Grid;
+                Grid.SetRow(control, 1);
+                Grid.SetColumn(control, 2);
+
+                //control.SetValue(Grid.RowProperty, 0);
+                //control.SetValue(Grid.ColumnProperty, 1);
+
+                
+            }
         }
     } // end class MainPage
 } // end namespace UVU_GC3

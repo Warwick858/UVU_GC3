@@ -10,16 +10,18 @@
     d:DesignHeight="270"
     d:DesignWidth="581"
     
-    CanDrag="True" 
-    ManipulationMode="All"
-    ManipulationStarted="PBox_ManipulationStarted"
-    ManipulationDelta="PBox_ManipulationDelta"
-    ManipulationCompleted="PBox_ManipulationCompleted"
-    
-    
     DragOver="PBox_DragOver" 
-    Drop="PBox_Drop">
+    Drop="PBox_Drop" 
+    
+>
+    <!--PointerPressed="PBox_PointerPressed" 
+    PointerMoved="PBox_PointerMoved" 
+    PointerReleased="PBox_PointerReleased"-->
 
+    <!--CanDrag="True"-->
+
+
+    
     <FlipView 
         Name="PlayerFlipView" 
         Background="#888577" 
